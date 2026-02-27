@@ -1,3 +1,4 @@
+import 'package:device_monitor/src/config/env.dart';
 import 'package:device_monitor/src/core/presentation/bloc/app_theme/bloc_app_theme.dart';
 import 'package:device_monitor/src/core/services/navigation_service.dart';
 import 'package:device_monitor/src/core/services/vitals_background_service.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:device_monitor/src/config/routes/router_helper.dart';
 import 'package:device_monitor/src/config/routes/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:device_monitor/src/features/device/presentation/providers/provider_device_monitor.dart';
@@ -26,6 +28,15 @@ void callbackDispatcher() {
     }
     return Future.value(true);
   });
+}
+
+Future<void> initEnvConfig() async {
+  await dotenv.load(fileName: '.env');
+
+  Env.baseUrl = dotenv.env['BASE_URL']??'';
+  Env.type = EEnvType.prod;
+  Env.X_API_KEY = dotenv.env['X_API_KEY']??'';
+  Env.X_SERVICE_NAME = dotenv.env['X_SERVICE_NAME']??'';
 }
 
 Future<void> initApp() async {

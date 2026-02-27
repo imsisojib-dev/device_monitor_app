@@ -44,6 +44,7 @@ device_monitor_flutter_app/android/app/debug
 device_monitor_flutter_app/android/app/profile
 device_monitor_flutter_app/android/app/release
 device_monitor_flutter_app/android/app/.cxx
+*.env
 
 
 ### BACKEND ----------------------------------------------------------------------
