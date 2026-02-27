@@ -2,16 +2,17 @@ import 'package:device_monitor/src/config/resources/app_colors.dart';
 import 'package:device_monitor/src/config/resources/app_theme.dart';
 import 'package:device_monitor/src/config/routes/routes.dart';
 import 'package:device_monitor/src/core/enums/e_loading.dart';
+import 'package:device_monitor/src/core/presentation/bloc/app_theme/bloc_app_theme.dart';
 import 'package:device_monitor/src/core/utils/helpers/calculation_helper.dart';
 import 'package:device_monitor/src/core/utils/helpers/format_helper.dart';
 import 'package:device_monitor/src/core/utils/helpers/widget_helper.dart';
-import 'package:device_monitor/src/features/common/presentation/providers/provider_theme.dart';
 import 'package:device_monitor/src/features/device/presentation/providers/provider_device_monitor.dart';
 import 'package:device_monitor/src/features/home/presentation/widgets/app_drawer.dart';
 import 'package:device_monitor/src/features/home/presentation/widgets/health_score_painter.dart';
 import 'package:device_monitor/src/features/home/presentation/widgets/modern_vital_card.dart';
 import 'package:device_monitor/src/features/vitals/presentation/providers/provider_vitals.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'dart:math' as math;
@@ -73,13 +74,13 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
         ),
         actions: [
-          Consumer<ProviderTheme>(
-            builder: (context, themeProvider, child) {
+          BlocBuilder<BlocAppTheme, StateAppTheme>(
+            builder: (context, state) {
               return IconButton(
                 icon: Icon(
-                  themeProvider.isDark ? Icons.light_mode : Icons.dark_mode,
+                  state.isDark ? Icons.light_mode : Icons.dark_mode,
                 ),
-                onPressed: () => themeProvider.toggleTheme(),
+                onPressed: () => context.read<BlocAppTheme>().add(EventAppThemeToggle()),
                 tooltip: 'Toggle Theme',
               );
             },

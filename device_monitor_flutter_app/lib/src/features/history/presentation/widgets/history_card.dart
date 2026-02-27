@@ -1,6 +1,6 @@
 import 'package:device_monitor/src/config/resources/app_theme.dart';
+import 'package:device_monitor/src/core/presentation/bloc/app_theme/bloc_app_theme.dart';
 import 'package:device_monitor/src/core/utils/helpers/widget_helper.dart';
-import 'package:device_monitor/src/features/common/presentation/providers/provider_theme.dart';
 import 'package:device_monitor/src/features/home/presentation/widgets/modern_vital_card.dart';
 import 'package:device_monitor/src/features/vitals/domain/entities/vitals_entity.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class HistoryCard extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    bool isDark = context.read<ProviderTheme>().isDark;
+    bool isDark = context.read<BlocAppTheme>().state.isDark;
 
     return Card(
       shape: RoundedRectangleBorder(
