@@ -10,7 +10,7 @@ import 'package:device_monitor/src/core/services/navigation_service.dart';
 import 'package:device_monitor/src/core/utils/helpers/widget_helper.dart';
 import 'package:device_monitor/src/core/widgets/buttons/basic_button.dart';
 import 'package:device_monitor/src/features/device/data/requests/request_register_device.dart';
-import 'package:device_monitor/src/features/device/domain/entities/device_entity.dart';
+import 'package:device_monitor/src/core/domain/entities/device_entity.dart';
 import 'package:device_monitor/src/features/device/domain/usecases/usecase_register_device.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';

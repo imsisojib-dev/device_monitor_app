@@ -1,4 +1,4 @@
-import 'package:device_monitor/src/features/vitals/domain/entities/vitals_entity.dart';
+import 'package:device_monitor/src/core/domain/entities/vitals_entity.dart';
 
 class CalculationHelper {
   static double calculateHealthScore(VitalsEntity? vitals) {

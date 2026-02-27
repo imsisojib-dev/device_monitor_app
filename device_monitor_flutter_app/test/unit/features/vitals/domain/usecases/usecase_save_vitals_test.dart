@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:device_monitor/src/features/vitals/domain/usecases/usecase_save_vitals.dart';
 import 'package:device_monitor/src/features/vitals/data/requests/request_vitals.dart';
-import 'package:device_monitor/src/features/vitals/domain/entities/vitals_entity.dart';
+import 'package:device_monitor/src/core/domain/entities/vitals_entity.dart';
 import 'package:device_monitor/src/core/data/models/api_response.dart';
 import 'package:device_monitor/src/core/data/models/failure.dart';
 

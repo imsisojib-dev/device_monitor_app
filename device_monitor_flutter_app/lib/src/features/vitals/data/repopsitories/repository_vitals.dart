@@ -8,7 +8,7 @@ import 'package:device_monitor/src/core/domain/interfaces/interface_api_intercep
 import 'package:device_monitor/src/core/services/token_service.dart';
 import 'package:device_monitor/src/core/utils/helpers/debugger_helper.dart';
 import 'package:device_monitor/src/features/vitals/data/requests/request_vitals.dart';
-import 'package:device_monitor/src/features/vitals/domain/entities/vitals_entity.dart';
+import 'package:device_monitor/src/core/domain/entities/vitals_entity.dart';
 import 'package:device_monitor/src/features/vitals/domain/interfaces/i_repository_vitals.dart';
 import 'package:http/http.dart' as http;
 
