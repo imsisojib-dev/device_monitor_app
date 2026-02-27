@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:device_monitor/my_app.dart';
 import 'package:device_monitor/src/core/data/repositories/cache_repository_impl.dart';
 import 'package:device_monitor/src/core/services/device_vitals_service.dart';
-import 'package:device_monitor/src/features/device/domain/entities/device_entity.dart';
+import 'package:device_monitor/src/core/domain/entities/device_entity.dart';
 import 'package:device_monitor/src/features/vitals/data/requests/request_vitals.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;

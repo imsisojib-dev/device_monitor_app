@@ -11,7 +11,7 @@ import 'package:device_monitor/src/core/utils/helpers/widget_helper.dart';
 import 'package:device_monitor/src/core/widgets/buttons/basic_button.dart';
 import 'package:device_monitor/src/features/device/presentation/providers/provider_device_monitor.dart';
 import 'package:device_monitor/src/features/vitals/data/requests/request_vitals.dart';
-import 'package:device_monitor/src/features/vitals/domain/entities/vitals_entity.dart';
+import 'package:device_monitor/src/core/domain/entities/vitals_entity.dart';
 import 'package:device_monitor/src/features/vitals/domain/usecases/usecase_save_vitals.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';

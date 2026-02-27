@@ -1,4 +1,3 @@
-// lib/models/analytics_models.dart
 class AnalyticsData {
   final String deviceId;
   final AnalyzedPeriod analyzedPeriod;

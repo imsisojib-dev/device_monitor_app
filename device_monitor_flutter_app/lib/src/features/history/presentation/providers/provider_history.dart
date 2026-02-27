@@ -4,7 +4,7 @@ import 'package:device_monitor/src/core/di/di_container.dart';
 import 'package:device_monitor/src/core/enums/e_loading.dart';
 import 'package:device_monitor/src/core/enums/e_sort_order.dart';
 import 'package:device_monitor/src/features/history/domain/usecases/usecase_fetch_vitals.dart';
-import 'package:device_monitor/src/features/vitals/domain/entities/vitals_entity.dart';
+import 'package:device_monitor/src/core/domain/entities/vitals_entity.dart';
 import 'package:flutter/foundation.dart';
 
 class ProviderHistory extends ChangeNotifier {
