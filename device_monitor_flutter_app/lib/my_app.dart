@@ -1,14 +1,13 @@
+import 'package:device_monitor/src/core/presentation/bloc/app_theme/bloc_app_theme.dart';
 import 'package:device_monitor/src/core/services/navigation_service.dart';
-import 'package:device_monitor/src/core/services/token_service.dart';
 import 'package:device_monitor/src/core/services/vitals_background_service.dart';
-import 'package:device_monitor/src/features/common/presentation/providers/provider_theme.dart';
 import 'package:device_monitor/src/features/vitals/presentation/providers/provider_vitals.dart';
 import 'package:flutter/material.dart';
 import 'package:device_monitor/src/config/routes/router_helper.dart';
 import 'package:device_monitor/src/config/routes/routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:device_monitor/src/core/domain/interfaces/interface_cache_repository.dart';
 import 'package:device_monitor/src/features/device/presentation/providers/provider_device_monitor.dart';
 import 'package:workmanager/workmanager.dart';
 import 'src/config/resources/app_theme.dart';
@@ -29,25 +28,31 @@ void callbackDispatcher() {
   });
 }
 
-Future<void> initApp()async{
-  await di.init();  //initializing Dependency Injection
+Future<void> initApp() async {
+  await di.init(); //initializing Dependency Injection
 
   //starting background service to store data
   VitalsBackgroundService().start();
 
   runApp(
-    MultiProvider(
+    MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => di.sl<ProviderDeviceMonitor>()),
-        ChangeNotifierProvider(create: (_) => di.sl<ProviderTheme>()),
-        ChangeNotifierProvider(create: (_) => di.sl<ProviderVitals>()),
+        BlocProvider<BlocAppTheme>(
+          create: (BuildContext context) => BlocAppTheme(),
+        ),
       ],
-      child: const MyApp(),
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => di.sl<ProviderDeviceMonitor>()),
+          ChangeNotifierProvider(create: (_) => di.sl<ProviderVitals>()),
+        ],
+        child: const MyApp(),
+      ),
     ),
   );
 }
 
-class MyApp extends StatefulWidget{
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
@@ -56,7 +61,6 @@ class MyApp extends StatefulWidget{
 
 class _MyAppState extends State<MyApp> {
   final NavigationService navigationService = sl();
-
 
   @override
   void initState() {
@@ -69,25 +73,27 @@ class _MyAppState extends State<MyApp> {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (_, app) {
-        return Consumer<ProviderTheme>(builder: (_, themeProvider, child){
-          return MaterialApp(
-            navigatorKey: navigationService.navigatorKey,
-            debugShowCheckedModeBanner: false,
-            builder: (context, child) {
-              return ScrollConfiguration(
-                //Removes the whole common's scroll glow
-                behavior: AppBehavior(),
-                child: child!,
-              );
-            },
-            title: 'Device Monitor',
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: themeProvider.themeMode,
-            initialRoute: Routes.splashScreen,
-            onGenerateRoute: RouterHelper.router.generator,
-          );
-        });
+        return BlocBuilder<BlocAppTheme,StateAppTheme>(
+          builder: (_, themeState){
+            return MaterialApp(
+              navigatorKey: navigationService.navigatorKey,
+              debugShowCheckedModeBanner: false,
+              builder: (context, child) {
+                return ScrollConfiguration(
+                  //Removes the whole common's scroll glow
+                  behavior: AppBehavior(),
+                  child: child!,
+                );
+              },
+              title: 'Device Monitor',
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: themeState.themeMode,
+              initialRoute: Routes.splashScreen,
+              onGenerateRoute: RouterHelper.router.generator,
+            );
+          },
+        );
       },
     );
   }
@@ -97,10 +103,10 @@ class _MyAppState extends State<MyApp> {
 class AppBehavior extends ScrollBehavior {
   @override
   Widget buildViewportChrome(
-      BuildContext context,
-      Widget child,
-      AxisDirection axisDirection,
-      ) {
+    BuildContext context,
+    Widget child,
+    AxisDirection axisDirection,
+  ) {
     return child;
   }
 }
