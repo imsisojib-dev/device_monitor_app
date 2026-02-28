@@ -10,7 +10,6 @@ import 'package:device_monitor/src/features/analytics/domain/interfaces/i_reposi
 import 'package:device_monitor/src/features/analytics/presentation/providers/provider_analytics.dart';
 import 'package:device_monitor/src/features/device/data/repositories/repository_device.dart';
 import 'package:device_monitor/src/features/device/domain/interfaces/i_repository_device.dart';
-import 'package:device_monitor/src/features/device/presentation/providers/provider_device_monitor.dart';
 import 'package:device_monitor/src/features/history/presentation/providers/provider_history.dart';
 import 'package:device_monitor/src/features/vitals/data/repopsitories/repository_vitals.dart';
 import 'package:device_monitor/src/features/vitals/domain/interfaces/i_repository_vitals.dart';
@@ -38,7 +37,6 @@ Future<void> init() async {
 
   ///PROVIDERS
   //region Providers
-  sl.registerFactory(() => ProviderDeviceMonitor(),);
   sl.registerFactory(() => ProviderVitals(),);
   sl.registerFactory(() => ProviderHistory(),);
   sl.registerFactory(() => ProviderAnalytics(),);

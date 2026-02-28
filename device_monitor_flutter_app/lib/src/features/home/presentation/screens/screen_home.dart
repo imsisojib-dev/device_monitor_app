@@ -6,7 +6,7 @@ import 'package:device_monitor/src/core/presentation/bloc/app_theme/bloc_app_the
 import 'package:device_monitor/src/core/utils/helpers/calculation_helper.dart';
 import 'package:device_monitor/src/core/utils/helpers/format_helper.dart';
 import 'package:device_monitor/src/core/utils/helpers/widget_helper.dart';
-import 'package:device_monitor/src/features/device/presentation/providers/provider_device_monitor.dart';
+import 'package:device_monitor/src/features/device/presentation/bloc/bloc_device_monitor.dart';
 import 'package:device_monitor/src/features/home/presentation/widgets/app_drawer.dart';
 import 'package:device_monitor/src/features/home/presentation/widgets/health_score_painter.dart';
 import 'package:device_monitor/src/features/home/presentation/widgets/modern_vital_card.dart';
@@ -360,7 +360,7 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
                   Navigator.pushNamed(
                     context,
                     Routes.analyticsScreen,
-                    arguments: context.read<ProviderDeviceMonitor>().currentDevice?.deviceId,
+                    arguments: context.read<BlocDeviceMonitor>().state.currentDevice?.deviceId,
                   );
                 },
               ),
@@ -377,7 +377,7 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
                   Navigator.pushNamed(
                     context,
                     Routes.historyScreen,
-                    arguments: context.read<ProviderDeviceMonitor>().currentDevice?.deviceId,
+                    arguments: context.read<BlocDeviceMonitor>().state.currentDevice?.deviceId,
                   );
                 },
               ),

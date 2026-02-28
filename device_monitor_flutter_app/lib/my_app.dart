@@ -2,6 +2,7 @@ import 'package:device_monitor/src/config/env.dart';
 import 'package:device_monitor/src/core/presentation/bloc/app_theme/bloc_app_theme.dart';
 import 'package:device_monitor/src/core/services/navigation_service.dart';
 import 'package:device_monitor/src/core/services/vitals_background_service.dart';
+import 'package:device_monitor/src/features/device/presentation/bloc/bloc_device_monitor.dart';
 import 'package:device_monitor/src/features/vitals/presentation/providers/provider_vitals.dart';
 import 'package:flutter/material.dart';
 import 'package:device_monitor/src/config/routes/router_helper.dart';
@@ -10,7 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:device_monitor/src/features/device/presentation/providers/provider_device_monitor.dart';
 import 'package:workmanager/workmanager.dart';
 import 'src/config/resources/app_theme.dart';
 import 'src/core/di/di_container.dart' as di;
@@ -51,10 +51,12 @@ Future<void> initApp() async {
         BlocProvider<BlocAppTheme>(
           create: (BuildContext context) => BlocAppTheme(),
         ),
+        BlocProvider<BlocDeviceMonitor>(
+          create: (BuildContext context) => BlocDeviceMonitor(),
+        ),
       ],
       child: MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => di.sl<ProviderDeviceMonitor>()),
           ChangeNotifierProvider(create: (_) => di.sl<ProviderVitals>()),
         ],
         child: const MyApp(),

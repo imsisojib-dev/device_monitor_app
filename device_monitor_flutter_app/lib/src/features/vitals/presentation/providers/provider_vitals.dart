@@ -1,15 +1,12 @@
-import 'dart:convert';
-
 import 'package:device_monitor/src/config/routes/routes.dart';
 import 'package:device_monitor/src/core/di/di_container.dart';
-import 'package:device_monitor/src/core/domain/interfaces/interface_cache_repository.dart';
 import 'package:device_monitor/src/core/enums/e_dialog_type.dart';
 import 'package:device_monitor/src/core/enums/e_loading.dart';
 import 'package:device_monitor/src/core/services/device_vitals_service.dart';
 import 'package:device_monitor/src/core/services/navigation_service.dart';
 import 'package:device_monitor/src/core/utils/helpers/widget_helper.dart';
 import 'package:device_monitor/src/core/widgets/buttons/basic_button.dart';
-import 'package:device_monitor/src/features/device/presentation/providers/provider_device_monitor.dart';
+import 'package:device_monitor/src/features/device/presentation/bloc/bloc_device_monitor.dart';
 import 'package:device_monitor/src/features/vitals/data/requests/request_vitals.dart';
 import 'package:device_monitor/src/core/domain/entities/vitals_entity.dart';
 import 'package:device_monitor/src/features/vitals/domain/usecases/usecase_save_vitals.dart';
@@ -74,7 +71,7 @@ class ProviderVitals extends ChangeNotifier {
       );
       return;
     }
-    String? deviceId = context.read<ProviderDeviceMonitor>().currentDevice?.deviceId;
+    String? deviceId = context.read<BlocDeviceMonitor>().state.currentDevice?.deviceId;
     if (deviceId == null) {
       WidgetHelper.showAlertDialog(
         title: "Warning!",
